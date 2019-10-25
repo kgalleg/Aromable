@@ -12,7 +12,7 @@ class Favorite(models.Model):
             verbose_name_plural = ("favorites")
 
     def __str__(self):
-        return self.title
+        return self.recipe
 
     def get_absolute_url(self):
         return reverse("favorite_detail", kwargs={"pk": self.pk})

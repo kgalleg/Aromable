@@ -4,9 +4,21 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Library</title>
+    <title>Aromable nav bar list.py</title>
 
-    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+    <style>
+        .navList {
+            list-style-type: none;
+            display: flex;
+            border: 1px solid lightgray;
+            padding: 1em;
+        }
+         .navList__route {
+                margin: 0 0.5em;
+         }
+    </style>
+
+    <!-- <link rel="stylesheet" href="{% static 'styles/base.css' %}" /> -->
 
     {% block css %}
     {% endblock %}
@@ -16,11 +28,10 @@
 
     <nav id="site-nav">
         <ol class="navList">
-            <li class="navList__route"><a href="{% url 'libraryapp:home' %}">Home</a></li>
-            <li class="navList__route"><a href="{% url 'libraryapp:libraries' %}">Libraries</a></li>
-            <li class="navList__route"><a href="{% url 'libraryapp:books' %}">Books</a></li>
-            <li class="navList__route"><a href="{% url 'libraryapp:librarians' %}">Librarians</a></li>
-            <li class="navList__route"><a href="{% url 'libraryapp:logout' %}">Logout</a></li>
+            <li class="navList__route"><a href="{% url 'aromableapp:home' %}">Home</a></li>
+
+            <li class="navList__route"><a href="{% url 'aromableapp:categories' %}">Categories</a></li>
+            <li class="navList__route"><a href="{% url 'aromableapp:logout' %}">Logout</a></li>
         </ol>
     </nav>
 

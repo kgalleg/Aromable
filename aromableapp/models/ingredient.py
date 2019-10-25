@@ -11,7 +11,7 @@ class Ingredient(models.Model):
         verbose_name_plural = ("ingredients")
 
     def __str__(self):
-        return self.title
+        return self.name
 
     def get_absolute_url(self):
         return reverse("ingredient_detail", kwargs={"pk": self.pk})
