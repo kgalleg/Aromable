@@ -1,0 +1,30 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Recipe form HTML</h1>
+
+    {% if recipe.id is not None %}
+        <form action="{% url 'aromableapp:recipe' recipe.id %}" method="post">
+    {% else %}
+        <form action="{% url 'aromableapp:recipes' %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <fieldset>
+            <label for="name">Name: </label>
+            <input id="name" type="text" name="name" value="{{ recipe.name }}">
+        </fieldset>
+        <fieldset>
+            <label for="notes">Notes:</label>
+            <input id="notes" type="text" name="notes" value="{{ recipe.notes }}">
+        </fieldset>
+
+        {% if recipe.id is not None %}
+            <input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Update" />
+        {% else %}
+            <input type="submit" value="Create" />
+        {% endif %}
+
+    </form>
+
+{% endblock %}
