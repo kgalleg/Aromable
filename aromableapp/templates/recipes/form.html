@@ -17,6 +17,17 @@
             <label for="notes">Notes:</label>
             <input id="notes" type="text" name="notes" value="{{ recipe.notes }}">
         </fieldset>
+        <fieldset>
+            <label for="category">Category: </label>
+            <select id="category" type="text" name="category">
+                {% for category in all_categories%}
+                <option value="{{ category.id }}">
+                    {{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </fieldset>
+
+
 
         {% if recipe.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">
