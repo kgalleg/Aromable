@@ -9,23 +9,18 @@ urlpatterns = [
     path('', home, name='home'),
     path('home/', home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
+
     path('categories/', category_list, name='categories'),
 
-
-
     path('recipes/', recipe_list, name='recipes'),
-
     path('recipe/form', recipe_form, name='recipe_form'),
-
-    path('recipes/<int:recipe_id>/', recipe_details, name='recipe'),
+    path('recipes/<int:recipe_id>', recipe_details, name='recipe'),
     path('recipes/<int:recipe_id>/form', recipe_edit_form, name='recipe_edit_form'),
 
-    # url(r'^recipes$', recipe_list, name='recipes'),
-    # url(r'^recipes/(?P<recipe_id>[0-9]+)$', recipe_details, name="recipe"),
-    # url(r'^recipes/(?P<recipe_id>[0-9]+)/form$', recipe_edit_form, name='recipe_edit_form'),
-    # url(r'^recipe/form$', recipe_form, name='recipe_form'),
-
-
+    path('ingredients/', ingredient_list, name='ingredients'),
+    path('ingredient/form', ingredient_form, name='ingredient_form'),
+    path('ingredients/<int:ingredient_id>', ingredient_details, name='ingredient'),
+    path('ingredients/<int:ingredient_id>/form', ingredient_edit_form, name='ingredient_edit_form'),
 
 
 

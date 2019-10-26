@@ -1,0 +1,21 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Ingredients</h1>
+
+    <a href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a>
+
+    <ol>
+    {% for ingredient in all_ingredients %}
+        <li>
+            <a href="{% url 'aromableapp:ingredient' ingredient.id %}">{{ ingredient.name }}</a>
+            ({{ ingredient.notes }})
+            <!-- <ul>
+            {% for book in library.books %}
+                <li>{{ book.title }}</li>
+            {% endfor %}
+            </ul> -->
+        </li>
+    {% endfor %}
+    </ol>
+{% endblock %}

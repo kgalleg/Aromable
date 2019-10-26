@@ -1,0 +1,30 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Enter your Oil</h1>
+
+    {% if ingredient.id is not None %}
+        <form action="{% url 'aromableapp:ingredient' ingredient.id %}" method="post">
+    {% else %}
+        <form action="{% url 'aromableapp:ingredients' %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <fieldset>
+            <label for="name">Name: </label>
+            <input id="name" type="text" name="name" value="{{ ingredient.name }}">
+        </fieldset>
+        <fieldset>
+            <label for="notes">Notes:</label>
+            <input id="notes" type="text" name="notes" value="{{ ingredient.notes }}">
+        </fieldset>
+
+        {% if ingredient.id is not None %}
+            <input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Update" />
+        {% else %}
+            <input type="submit" value="Create" />
+        {% endif %}
+
+    </form>
+
+{% endblock %}
