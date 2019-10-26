@@ -3,8 +3,8 @@
 {% block content %}
     <section id="recipe-details">
         <h1>{{ recipe.name}}</h1>
-        <h2>By {{ recipe.notes }}</h2>
-        <h2>Category {{ category.name }}</h2>
+        <h5>By {{ recipe.notes }}</h5>
+        <h5 value="{{ recipe.category.id }}">Category: {{ recipe.category.name }}</h5>
     </section>
 
 

@@ -20,6 +20,14 @@ urlpatterns = [
     path('recipes/<int:recipe_id>/', recipe_details, name='recipe'),
     path('recipes/<int:recipe_id>/form', recipe_edit_form, name='recipe_edit_form'),
 
+    # url(r'^recipes$', recipe_list, name='recipes'),
+    # url(r'^recipes/(?P<recipe_id>[0-9]+)$', recipe_details, name="recipe"),
+    # url(r'^recipes/(?P<recipe_id>[0-9]+)/form$', recipe_edit_form, name='recipe_edit_form'),
+    # url(r'^recipe/form$', recipe_form, name='recipe_form'),
+
+
+
+
 
 
 
