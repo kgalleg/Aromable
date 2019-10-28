@@ -28,4 +28,5 @@ urlpatterns = [
 
     url(r'accounts/', include('django.contrib.auth.urls')),
     url(r'^logout/$', logout_user, name='logout'),
+    url(r'^register/$', register_user, name='register'),
 ]
