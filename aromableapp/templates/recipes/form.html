@@ -1,7 +1,7 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Recipe form HTML</h1>
+    <h1>Recipe form</h1>
 
     {% if recipe.id is not None %}
         <form action="{% url 'aromableapp:recipe' recipe.id %}" method="post">

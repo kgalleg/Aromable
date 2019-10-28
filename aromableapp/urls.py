@@ -11,6 +11,11 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('categories/', category_list, name='categories'),
+    path('category/form', category_form, name='category_form'),
+    path('categories/<int:category_id>', category_details, name='category'),
+    path('categories/<int:category_id>/form', category_edit_form, name='category_edit_form'),
+
+
 
     path('recipes/', recipe_list, name='recipes'),
     path('recipe/form', recipe_form, name='recipe_form'),
