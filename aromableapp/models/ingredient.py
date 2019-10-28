@@ -1,17 +1,18 @@
 from django.db import models
+from django.urls import reverse
 
+class Ingredient(models.Model):
 
-class Library(models.Model):
-
-    title = models.CharField(max_length=50)
-    address = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    notes = models.CharField(max_length=150, blank=True, null=True)
 
     class Meta:
-        verbose_name = ("library")
-        verbose_name_plural = ("libraries")
+        verbose_name = ("ingredient")
+        verbose_name_plural = ("ingredients")
 
     def __str__(self):
-        return self.title
+        return self.name
 
     def get_absolute_url(self):
-        return reverse("library_detail", kwargs={"pk": self.pk})
+        return reverse("ingredient_detail", kwargs={"pk": self.pk})
+

@@ -1,0 +1,15 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Categories</h1>
+
+    <ol>
+    {% for category in all_categories %}
+        <li>
+            <a href="{% url 'aromableapp:categories' %}">
+                {{ category.name }}
+            </a>
+        </li>
+    {% endfor %}
+    </ol>
+{% endblock %}

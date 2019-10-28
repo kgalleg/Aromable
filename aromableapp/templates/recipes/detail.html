@@ -1,0 +1,23 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <section id="recipe-details">
+        <h1>{{ recipe.name}}</h1>
+        <h5>By {{ recipe.notes }}</h5>
+        <!-- <div value="{{ recipe.category.id }}">Category: {{ recipe.category.name }}</div> -->
+    </section>
+
+
+    <section id="recipe-actions" style="display:flex;">
+        <form action="{% url 'aromableapp:recipe' recipe.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+            <button>Delete</button>
+        </form>
+
+        <form action="{% url 'aromableapp:recipe_edit_form' recipe.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+    </section>
+{% endblock %}
