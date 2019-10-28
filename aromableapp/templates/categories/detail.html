@@ -2,19 +2,19 @@
 
 {% block content %}
     <section id="categories">
+            <h5>Name: {{ category.name }}</h5>
 
     </section>
 
 
     <section id="category-actions" style="display:flex;">
-        <form action="{% url 'aromableapp:categories' category.id %}" method="POST">
+        <form action="{% url 'aromableapp:category' category.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
             <button>Delete</button>
         </form>
 
-        <form action="{% url 'aromableapp:categories' category.id %}" method="GET">
-                <!-- <form action="{% url 'libraryapp:book_edit_form' category.id %}" method="GET"> -->
+        <form action="{% url 'aromableapp:category_edit_form' category.id %}" method="GET">
             {% csrf_token %}
             <button>Edit</button>
         </form>

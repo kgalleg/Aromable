@@ -7,6 +7,17 @@ from aromableapp.models import model_factory
 from ..connection import Connection
 
 
+def create_category(cursor, row):
+    _row = sqlite3.Row(cursor, row)
+
+    category = Category()
+    category.id = _row["id"]
+    category.name = _row["name"]
+
+    return (category,)
+
+
+
 @login_required
 def category_list(request):
     if request.method == 'GET':
@@ -33,10 +44,9 @@ def category_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            INSERT INTO aromableapp_category
-            (name)
+            INSERT INTO aromableapp_category(name)
             values (?)
             """,
-            (form_data['name']))
+            (form_data['name'],))
 
         return redirect(reverse('aromableapp:categories'))
