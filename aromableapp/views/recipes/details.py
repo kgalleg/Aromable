@@ -2,83 +2,38 @@ import sqlite3
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from aromableapp.models import Recipe, Category, RecipeIngredient, Ingredient
+from aromableapp.models import Recipe
 from aromableapp.models import model_factory
 from ..connection import Connection
 
 
-
 def get_recipe(recipe_id):
     with sqlite3.connect(Connection.db_path) as conn:
-
         conn.row_factory = model_factory(Recipe)
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-                SELECT
-                    r.id recipe_id,
-                    r.name,
-                    r.notes,
-                    i.id ingredient_id,
-                    i.name ingredient_name,
-                    ri.id recipeingredient_id,
-                    ri.quantity recipeingredient_quantity
+        SELECT
+            r.id,
+            r.name,
+            r.notes
+        FROM aromableapp_recipe r
+        WHERE r.id = ?
+        """, (recipe_id,))
 
-                FROM aromableapp_recipe r
-                JOIN aromableapp_ingredient i ON r.id = i.id
-                JOIN aromableapp_recipeingredient ri ON r.id = i.id
-                WHERE r.id = ?
-                """, (recipe_id,))
+        return db_cursor.fetchone()
 
-    return db_cursor.fetchone()
-
-    def get_recipes():
-        with sqlite3.connect(Connection.db_path) as conn:
-            conn.row_factory = model_factory(Recipe)
-            db_cursor = conn.cursor()
-
-        db_cursor.execute("""
-            SELECT
-                    r.id recipe_id,
-                    r.name,
-                    r.notes,
-                    i.id ingredient_id,
-                    i.name ingredient_name,
-                    ri.id recipeingredient_id,
-                    ri.quantity recipeingredient_quantity
-
-                FROM aromableapp_recipe r
-                JOIN aromableapp_ingredient i ON r.id = i.id
-                JOIN aromableapp_recipeingredient ri ON r.id = i.id
-                """)
-
-        return db_cursor.fetchall()
-
-def get_categories():
+def get_recipes():
     with sqlite3.connect(Connection.db_path) as conn:
-        conn.row_factory = model_factory(Category)
+        conn.row_factory = model_factory(Recipe)
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-        select
-            c.id,
-            c.name
-        from aromableapp_category c
-        """)
-
-        return db_cursor.fetchall()
-
-def get_ingredients():
-    with sqlite3.connect(Connection.db_path) as conn:
-        conn.row_factory = model_factory(Ingredient)
-        db_cursor = conn.cursor()
-
-        db_cursor.execute("""
-        select
-            i.id,
-            i.name,
-            i.notes
-        from aromableapp_ingredient i
+        SELECT
+            r.id,
+            r.name,
+            r.notes
+        FROM aromableapp_recipe r
         """)
 
         return db_cursor.fetchall()
@@ -87,6 +42,7 @@ def get_ingredients():
 @login_required
 def recipe_details(request, recipe_id):
     if request.method == 'GET':
+
         recipe = get_recipe(recipe_id)
         template = 'recipes/detail.html'
         context = {
@@ -109,14 +65,12 @@ def recipe_details(request, recipe_id):
                 db_cursor.execute("""
                     UPDATE aromableapp_recipe
                     SET name = ?,
-                        notes = ?,
-                        category_id = ?
+                        notes = ?
                     WHERE id = ?
                     """,
                     (
                         form_data['name'],
                         form_data['notes'],
-                        form_data['category_id'],
                         recipe_id,
                     )
                 )
@@ -137,5 +91,3 @@ def recipe_details(request, recipe_id):
                 """, (recipe_id,))
 
             return redirect(reverse('aromableapp:recipes'))
-
-

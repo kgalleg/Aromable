@@ -10,12 +10,13 @@
         <li>
             <a href="{% url 'aromableapp:recipe' recipe.id %}">{{ recipe.name }}</a>
             <br>(* Notes: {{ recipe.notes }}) <br>
-            <!-- <ul> -->
-            <!--{% for ingredient in recipe.ingredients %}
-                <li>{{ ingredient.name}}</li>// -->
 
-            <!-- {% endfor %} -->
-            <!-- </ul> -->
+            <ul>
+          {% for ingredient in recipe.ingredients %}
+                <li>{{ ingredient.name}}</li>
+
+            {% endfor %}
+            </ul>
         </li>
 
     {% endfor %}
