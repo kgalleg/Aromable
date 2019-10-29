@@ -1,7 +1,7 @@
 import sqlite3
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from aromableapp.models import Recipe, Category
+from aromableapp.models import Recipe, Category, Ingredient
 from aromableapp.models import model_factory
 from ..connection import Connection
 
@@ -36,6 +36,21 @@ def get_categories():
 
         return db_cursor.fetchall()
 
+def get_ingredients():
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(Ingredient)
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        select
+            i.id,
+            i.name
+        from aromableapp_ingredient i
+        """)
+
+        return db_cursor.fetchall()
+
+
 
 
 
@@ -46,9 +61,11 @@ def get_categories():
 def recipe_form(request):
     if request.method == 'GET':
         categories = get_categories()
+        ingredients = get_ingredients()
         template = 'recipes/form.html'
         context = {
-            'all_categories': categories
+            'all_categories': categories,
+            'all_ingredients': ingredients
         }
 
         return render(request, template, context)

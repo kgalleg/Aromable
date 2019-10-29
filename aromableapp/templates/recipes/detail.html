@@ -2,8 +2,13 @@
 
 {% block content %}
     <section id="recipe-details">
-        <h1>{{ recipe.name}}</h1>
-        <h5>By {{ recipe.notes }}</h5>
+        <h1>Recipe Name: {{ recipe.name}}</h1>
+        <h5>Recipe Notes/Description: {{ recipe.notes }}</h5>
+        <h5>Category: {{ recipe.category.name }}</h5>
+        <h5>Oil: {{ recipe.ingredient.name}}</h5>
+
+
+
         <!-- <div value="{{ recipe.category.id }}">Category: {{ recipe.category.name }}</div> -->
     </section>
 

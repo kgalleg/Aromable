@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 
 class Recipe(models.Model):
 
-    name = models.CharField(max_length=50)
-    notes = models.CharField(max_length=150)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    notes = models.CharField(max_length=150, blank=True, null=True)
 
     #foreign keys
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

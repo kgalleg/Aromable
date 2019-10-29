@@ -3,6 +3,8 @@
 {% block content %}
 <h1>Aromable</h1>
 
+<h4>Hi {{ user.first_name }}!</h4> <br>
+
 <a href="{% url 'aromableapp:recipe_form' %}">Add Recipe</a><br>
 <a href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a><br>
 <a href="{% url 'aromableapp:ingredients' %}">View oil inventory</a><br>
