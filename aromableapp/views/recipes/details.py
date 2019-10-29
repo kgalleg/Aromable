@@ -23,20 +23,20 @@ def get_recipe(recipe_id):
 
         return db_cursor.fetchone()
 
-def get_recipes():
-    with sqlite3.connect(Connection.db_path) as conn:
-        conn.row_factory = model_factory(Recipe)
-        db_cursor = conn.cursor()
+# def get_recipes():
+#     with sqlite3.connect(Connection.db_path) as conn:
+#         conn.row_factory = model_factory(Recipe)
+#         db_cursor = conn.cursor()
 
-        db_cursor.execute("""
-        SELECT
-            r.id,
-            r.name,
-            r.notes
-        FROM aromableapp_recipe r
-        """)
+#         db_cursor.execute("""
+#         SELECT
+#            r.name recipe_name,
+#            c.name category_name
+#         FROM aromableapp_recipe r
+#         left JOIN aromableapp_category c ON r.category_id = c.id;
+#         """)
 
-        return db_cursor.fetchall()
+#         return db_cursor.fetchall()
 
 
 @login_required
