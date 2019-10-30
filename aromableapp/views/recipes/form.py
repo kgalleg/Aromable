@@ -15,7 +15,9 @@ def get_recipe(recipe_id):
         SELECT
             r.id,
             r.name,
-            r.notes
+            r.notes,
+            r.category_id,
+            r.user_id
         FROM aromableapp_recipe r
         WHERE r.id = ?
         """, (recipe_id,))
@@ -44,7 +46,8 @@ def get_ingredients():
         db_cursor.execute("""
         select
             i.id,
-            i.name
+            i.name,
+            i.notes
         from aromableapp_ingredient i
         """)
 
@@ -52,16 +55,13 @@ def get_ingredients():
 
 
 
-
-
-
-
-
 @login_required
 def recipe_form(request):
     if request.method == 'GET':
+
         categories = get_categories()
         ingredients = get_ingredients()
+
         template = 'recipes/form.html'
         context = {
             'all_categories': categories,
@@ -75,10 +75,14 @@ def recipe_form(request):
 def recipe_edit_form(request, recipe_id):
     if request.method == 'GET':
         recipe = get_recipe(recipe_id)
+        categories = get_categories()
+        ingredients = get_ingredients()
 
         template = 'recipes/form.html'
         context = {
-            'recipe': recipe
+            'recipe': recipe,
+            'all_categories': categories,
+            'all_ingredients': ingredients
         }
 
         return render(request, template, context)

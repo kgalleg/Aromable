@@ -1,7 +1,7 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Recipe form</h1>
+    <h1>Recipe Form</h1>
 
     {% if recipe.id is not None %}
         <form action="{% url 'aromableapp:recipe' recipe.id %}" method="post">
@@ -31,7 +31,7 @@
             <label for="ingredient">Oils: </label>
 
                 {% for ingredient in all_ingredients%}
-                <input type="checkbox" id="ingredient"  name="ingredient" value="{{ recipeingredient.ingredientid}}">
+                <input type="checkbox" id="ingredient{{ ingredient.id}}"  name="ingredient" value="{{ ingredient.id}}">
                     {{ ingredient.name }}
                 {% endfor %}
 

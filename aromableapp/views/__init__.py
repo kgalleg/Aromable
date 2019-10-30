@@ -16,3 +16,5 @@ from .recipes.form import recipe_form, recipe_edit_form
 from .ingredients.form import ingredient_form, ingredient_edit_form
 from .ingredients.details import ingredient_details
 from .ingredients.list import ingredient_list
+
+from .recipeingredients.list import recipeingredient_list

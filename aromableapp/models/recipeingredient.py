@@ -8,6 +8,6 @@ class RecipeIngredient(models.Model):
     quantity = models.IntegerField()
 
 #foreign keys
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredient_list')
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 

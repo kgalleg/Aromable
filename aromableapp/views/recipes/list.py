@@ -12,6 +12,8 @@ from ..connection import Connection
 def recipe_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+
+
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
@@ -19,6 +21,7 @@ def recipe_list(request):
                SELECT
                     r.id recipe_id,
                     r.name recipe_name,
+                    r.notes recipe_notes,
                     c.name category_name,
                     c.id category_id
 
@@ -57,11 +60,26 @@ def recipe_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-                INSERT INTO aromableapp_recipe (name, category_id, user_id)
-                VALUES (?, ?, ?)
+                INSERT INTO aromableapp_recipe (name, category_id, notes, user_id)
+                VALUES (?, ?, ?, ?)
                 """,
-                (form_data['name'], form_data['category'],
+                (form_data['name'], form_data['category'], form_data['notes'],
                 request.user.id,)
             )
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+                select last_insert_rowid()
+                """
+
+            )
+
+            new_recipe_id=db_cursor.fetchone()
+
+            for id in request.POST.getlist('ingredient'):
+
+
+
 
         return redirect(reverse('aromableapp:recipes'))

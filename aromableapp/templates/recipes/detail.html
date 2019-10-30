@@ -3,13 +3,20 @@
 {% block content %}
     <section id="recipe-details">
         <h1>Recipe Name: {{ recipe.name}}</h1>
-        <h5>Recipe Notes/Description: {{ recipe.notes }}</h5>
+        <h5>Recipe Notes: {{ recipe.notes }}</h5>
         <h5>Category: {{ recipe.category.name }}</h5>
-        <h5>Oil: {{ recipe.ingredient.name}}</h5>
 
+        <h5>Oil(s): {{ recipe.ingredient.name}}</h5>
+
+        <!-- <ul style="list-style-type:none">
+            {% for recipeingredient in recipe.ingredient_list.all %}
+                <li>Oil List: {{ recipeingredient.ingredient.name}}</li>
+            {% endfor %}
+        </ul> -->
 
 
         <!-- <div value="{{ recipe.category.id }}">Category: {{ recipe.category.name }}</div> -->
+
     </section>
 
 
