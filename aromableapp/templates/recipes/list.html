@@ -1,27 +1,24 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Recipes TEMPLATE HTML</h1>
+    <h1>Recipes
+
+    </h1>
 
     <a href="{% url 'aromableapp:recipe_form' %}">Add Recipe</a>
 
     <ol>
     {% for recipe in all_recipes %}
+
         <li>
             <a href="{% url 'aromableapp:recipe' recipe.id %}">{{ recipe.name }}</a>
-            <br>(* Notes: {{ recipe.notes }}) <br>
-            <!-- <ul> -->
-            <!--{% for ingredient in recipe.ingredients %}
-                <li>{{ ingredient.name}}</li>// -->
-
-            <!-- {% endfor %} -->
-            <!-- </ul> -->
+            <br><ul>Category: {{ recipe.category.name }}</ul>  <br>
         </li>
 
     {% endfor %}
 
 
-    <div><a href="{% url 'aromableapp:home' %}">Go Back</a></div>
+    <!-- <div><a href="{% url 'aromableapp:home' %}">Go Back</a></div> -->
     </ol>
 
 {% endblock %}
