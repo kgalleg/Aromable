@@ -75,9 +75,9 @@ def recipe_list(request):
 
             )
 
-            new_recipe_id=db_cursor.fetchone()
+            new_recipe_id = db_cursor.fetchone()
 
-            for id in request.POST.getlist('ingredient'):
+            # for id in request.POST.getlist('ingredient'):
 
 
 
