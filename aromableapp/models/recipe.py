@@ -9,7 +9,7 @@ class Recipe(models.Model):
     notes = models.CharField(max_length=150, blank=True, null=True)
 
     #foreign keys
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:

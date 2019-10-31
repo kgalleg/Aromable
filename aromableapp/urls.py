@@ -22,12 +22,18 @@ urlpatterns = [
     path('recipes/<int:recipe_id>', recipe_details, name='recipe'),
     path('recipes/<int:recipe_id>/form', recipe_edit_form, name='recipe_edit_form'),
 
+    # path('recipes/', recipe_ingredient_list, name='recipes'),
+
+
+
+
+
     path('ingredients/', ingredient_list, name='ingredients'),
     path('ingredient/form', ingredient_form, name='ingredient_form'),
     path('ingredients/<int:ingredient_id>', ingredient_details, name='ingredient'),
     path('ingredients/<int:ingredient_id>/form', ingredient_edit_form, name='ingredient_edit_form'),
 
-
+    url(r'^recipe-ingredients/$', recipeingredient_list, name='recipe_ingredients'),
 
 
 

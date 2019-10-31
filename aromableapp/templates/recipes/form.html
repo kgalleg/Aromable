@@ -31,7 +31,7 @@
             <label for="ingredient">Oils: </label>
 
                 {% for ingredient in all_ingredients%}
-                <input type="checkbox" id="ingredient{{ ingredient.id}}"  name="ingredient" value="{{ ingredient.id}}">
+                <input type="checkbox" id="ingredient{{ ingredient.id}}"  name="ingredient[]" value="{{ ingredient.id}}">
                     {{ ingredient.name }}
                 {% endfor %}
 
