@@ -18,3 +18,5 @@ from .ingredients.details import ingredient_details
 from .ingredients.list import ingredient_list
 
 from .recipeingredients.list import recipeingredient_list
+
+# from .recipes.list import recipe_ingredient_list

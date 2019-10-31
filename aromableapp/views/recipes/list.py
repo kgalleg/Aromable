@@ -66,8 +66,8 @@ def recipe_list(request):
                 (form_data['name'], form_data['category'], form_data['notes'],
                 request.user.id,)
             )
-        with sqlite3.connect(Connection.db_path) as conn:
-            db_cursor = conn.cursor()
+        # with sqlite3.connect(Connection.db_path) as conn:
+        #     db_cursor = conn.cursor()
 
             db_cursor.execute("""
                 select last_insert_rowid()
@@ -76,9 +76,22 @@ def recipe_list(request):
             )
 
             new_recipe_id = db_cursor.fetchone()
+            tupleid = new_recipe_id[0]
 
-            # for id in request.POST.getlist('ingredient'):
+        with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
 
+                for id in request.POST.getlist('ingredient[]'):
+                    # tupleid2 = new_recipe_id[0]
+                    db_cursor.execute("""
+                        INSERT INTO aromableapp_recipeingredient
+                        (
+                            ingredient_id, recipe_id
+                        )
+                        VALUES (?, ?)
+                        """,
+                        (id, tupleid)
+                        )
 
 
 

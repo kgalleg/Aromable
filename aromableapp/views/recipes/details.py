@@ -57,7 +57,7 @@ def get_recipe(recipe_id):
                 WHERE r.id = ?
         """, (recipe_id,))
 
-        return db_cursor.fetchone()
+        return db_cursor.fetchall()
 
 def get_categories():
     with sqlite3.connect(Connection.db_path) as conn:
@@ -93,7 +93,8 @@ def get_ingredients():
 @login_required
 def recipe_details(request, recipe_id):
     if request.method == 'GET':
-        recipe = get_recipe(recipe_id)
+        # recipe = get_recipe(recipe_id)
+        recipe = Recipe.objects.get(pk=recipe_id)
         template = 'recipes/detail.html'
 
         context = {'recipe': recipe}
@@ -123,6 +124,22 @@ def recipe_details(request, recipe_id):
                         recipe_id,
                     )
                 )
+
+            new_recipe_id = db_cursor.fetchone()
+
+            for id in request.POST.getlist('ingredient_id'):
+
+                db_cursor.execute("""
+                    INSERT INTO aromablerapp_recipeingredient
+                    (
+                        ingredient_id, recipe_id
+                    )
+                    VALUES (?, ?)
+                    """,
+                    (form_data['recipe_id'], id,)
+                    )
+
+
 
             return redirect(reverse('aromableapp:recipes'))
 
