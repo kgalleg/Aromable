@@ -33,7 +33,9 @@ def category_list(request):
                 c.id,
                 c.name
             from aromableapp_category c
-            """)
+            where user_id = ?
+            """, (user.id,))
+
 
             all_categories = db_cursor.fetchall()
 
@@ -47,9 +49,9 @@ def category_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            INSERT INTO aromableapp_category(name)
-            values (?)
+            INSERT INTO aromableapp_category(name, user_id)
+            values (?, ?)
             """,
-            (form_data['name'],))
+            (form_data['name'], request.user.id))
 
         return redirect(reverse('aromableapp:categories'))
