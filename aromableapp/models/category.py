@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class Category(models.Model):
 
     name = models.CharField(max_length=50)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = ("category")
