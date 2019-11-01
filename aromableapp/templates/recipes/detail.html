@@ -1,30 +1,45 @@
-{% extends 'shared/base.html' %}
+{% extends 'shared/base.html' %} {% block content %}
+<section id="recipe-details">
+  <h1>Recipe Name: {{ recipe.name }}</h1>
+  <h5>Recipe Notes: {{ recipe.notes }}</h5>
+  <h5>Category: {{ recipe.category.name }}</h5>
+  <!-- <h5>Oil(s): {{ recipe.ingredient_list.all}}</h5> -->
 
-{% block content %}
-    <section id="recipe-details">
-        <h1>Recipe Name: {{ recipe.name}}</h1>
-        <h5>Recipe Notes: {{ recipe.notes }}</h5>
-        <h5>Category: {{ recipe.category.name }}</h5>
-        <!-- <h5>Oil(s): {{ recipe.ingredient_list.all}}</h5> -->
+  <p>Oil(s):</p>
+  {% for relationship in recipe.ingredient_list.all %}
+  <p>{{ relationship.ingredient.name }}</p>
+  {% endfor %}
+</section>
 
-        <p>Oil(s):</p>
-        {% for relationship in recipe.ingredient_list.all %}
-        <p>{{ relationship.ingredient.name }}</p>
-        {% endfor %}
+<section id="recipe-actions" style="display:flex;">
+  <form action="{% url 'aromableapp:favorites' %}" method="POST">
+    {% csrf_token %}
+    <input
+      type="hidden"
+      name="recipe_id"
+      id="recipe_id"
+      value="{{ recipe.id }}"
+    />
+    <button value="{{ recipe.id }}" type="submit">Add To Favorites</button>
+  </form>
+  <form action="{% url 'aromableapp:favorite' recipe.id  %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="DELETE" />
+    <button>Remove from Favorites</button>
+  </form>
 
-    </section>
+  <form action="{% url 'aromableapp:recipe' recipe.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="DELETE" />
+    <button>Delete Recipe</button>
+  </form>
 
-
-    <section id="recipe-actions" style="display:flex;">
-        <form action="{% url 'aromableapp:recipe' recipe.id %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="actual_method" value="DELETE">
-            <button>Delete</button>
-        </form>
-
-        <form action="{% url 'aromableapp:recipe_edit_form' recipe.id %}" method="GET">
-            {% csrf_token %}
-            <button>Edit</button>
-        </form>
-    </section>
+  <form
+    action="{% url 'aromableapp:recipe_edit_form' recipe.id %}"
+    method="GET"
+  >
+    {% csrf_token %}
+    <button>Edit Recipe</button>
+  </form>
+</section>
 {% endblock %}

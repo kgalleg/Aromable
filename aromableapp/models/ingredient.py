@@ -6,7 +6,7 @@ class Ingredient(models.Model):
 
     name = models.CharField(max_length=50, blank=True, null=True)
     notes = models.CharField(max_length=150, blank=True, null=True)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = ("ingredient")
