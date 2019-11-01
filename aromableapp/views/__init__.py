@@ -19,4 +19,5 @@ from .ingredients.list import ingredient_list
 
 from .recipeingredients.list import recipeingredient_list
 
-# from .recipes.list import recipe_ingredient_list
+from .favorites.list import favorite_list
+from .favorites.details import favorite

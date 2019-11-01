@@ -22,7 +22,10 @@ urlpatterns = [
     path('recipes/<int:recipe_id>', recipe_details, name='recipe'),
     path('recipes/<int:recipe_id>/form', recipe_edit_form, name='recipe_edit_form'),
 
-    # path('recipes/', recipe_ingredient_list, name='recipes'),
+
+    path('favorites/', favorite_list, name='favorites'),
+    path('favorites/<int:recipe_id>/', favorite, name='favorite'),
+
 
 
 
