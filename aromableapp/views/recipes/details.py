@@ -20,6 +20,8 @@ def create_recipe(cursor, row):
     category.name = _row["category_name"]
 
     recipeingredient = RecipeIngredient()
+    recipeingredient.recipe_id = _row["ri_recipe_id"]
+    recipeingredient.ingredient_id = _row["ri_ingredient_id"]
     recipeingredient.quantity = _row["quantity_drops"]
 
     ingredient = Ingredient()
@@ -80,10 +82,25 @@ def get_ingredients():
 
         db_cursor.execute("""
         select
-            ri.id,
-            ri.name,
-            ri.notes
+            i.id,
+            i.name,
+            i.notes
         from aromableapp_ingredient i
+        """)
+
+        return db_cursor.fetchall()
+
+def get_recipeingredients():
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(RecipeIngredient)
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        select
+            ri.id,
+            ri.recipe_id ri_recipe_id,
+            ri.ingredient_id ri_ingredient_id
+        from aromableapp_recipeingredient ri
         """)
 
         return db_cursor.fetchall()
@@ -115,29 +132,50 @@ def recipe_details(request, recipe_id):
                 db_cursor.execute("""
                     UPDATE aromableapp_recipe
                     SET name = ?,
-                        notes = ?
+                        notes = ?,
+                        category_id = ?
                     WHERE id = ?
                     """,
                     (
                         form_data['name'],
                         form_data['notes'],
+                        form_data['category'],
                         recipe_id,
                     )
                 )
 
-            new_recipe_id = db_cursor.fetchone()
 
-            for id in request.POST.getlist('ingredient_id'):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                # all_recipeingredients = get_recipeingredients()
+
+                # for recipeingredients in all_recipeingredients:
+                    # if recipeingredients.recipe_id == recipe_id:
 
                 db_cursor.execute("""
-                    INSERT INTO aromablerapp_recipeingredient
-                    (
-                        ingredient_id, recipe_id
-                    )
-                    VALUES (?, ?)
+                    DELETE FROM aromableapp_recipeingredient
+
+                    WHERE recipe_id = ?
                     """,
-                    (form_data['recipe_id'], id,)
+                    (recipe_id,)
                     )
+
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                for id in request.POST.getlist('ingredient[]'):
+
+                    db_cursor.execute("""
+                        INSERT INTO aromableapp_recipeingredient
+                        (
+                            ingredient_id, recipe_id
+                        )
+                        VALUES (?, ?)
+                        """,
+                        (id, recipe_id,)
+                        )
+
 
 
 

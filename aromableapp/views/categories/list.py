@@ -22,6 +22,9 @@ def create_category(cursor, row):
 def category_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+
+            user = request.user
+
             conn.row_factory = model_factory(Category)
             db_cursor = conn.cursor()
 
