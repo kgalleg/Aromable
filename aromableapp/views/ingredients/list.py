@@ -23,6 +23,9 @@ def create_ingredient(cursor, row):
 def ingredient_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+
+            user = request.user
+
             conn.row_factory = model_factory(Ingredient)
             db_cursor = conn.cursor()
 
@@ -32,7 +35,8 @@ def ingredient_list(request):
                     i.name,
                     i.notes
                 FROM aromableapp_ingredient i
-            """)
+                where user_id = ?
+            """, (user.id,))
 
             all_ingredients = db_cursor.fetchall()
 
@@ -46,11 +50,12 @@ def ingredient_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-                INSERT INTO aromableapp_ingredient(name, notes)
-                VALUES (?, ?)
+                INSERT INTO aromableapp_ingredient(name, notes, user_id)
+                VALUES (?, ?, ?)
                 """,
                 (form_data['name'],
-                form_data['notes'],)
+                form_data['notes'],
+                request.user.id)
             )
 
         return redirect(reverse('aromableapp:ingredients'))

@@ -13,7 +13,7 @@ def recipe_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
 
-            user = request.user
+
 
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
@@ -24,13 +24,14 @@ def recipe_list(request):
                     r.name recipe_name,
                     r.notes recipe_notes,
                     c.name category_name,
-                    c.id category_id
+                    c.id category_id,
+                    r.user_id
 
 
                 FROM aromableapp_recipe r
                 left JOIN aromableapp_category c ON r.category_id = c.id
-                where user_id = ?
-            """, (user.id,))
+                where r.user_id = ?
+                """, (request.user.id,))
 
 
             all_recipes = []
@@ -44,6 +45,7 @@ def recipe_list(request):
                 category = Category()
                 category.name = row['category_name']
                 category.id = row ['category_id']
+
 
                 recipe.category = category
 
