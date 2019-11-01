@@ -1,10 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Ingredient(models.Model):
 
     name = models.CharField(max_length=50, blank=True, null=True)
     notes = models.CharField(max_length=150, blank=True, null=True)
+    
 
     class Meta:
         verbose_name = ("ingredient")

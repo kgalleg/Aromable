@@ -1,6 +1,7 @@
 from django.db import models
 from .recipe import Recipe
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Favorite(models.Model):
 
