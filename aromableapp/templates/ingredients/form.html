@@ -1,7 +1,12 @@
 {% extends 'shared/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/ingredient.css' %}"  />
+{% endblock %}
 
 {% block content %}
-    <h1>Enter your Oil</h1>
+    <h1 class="enteroil">Enter Your Oil</h1>
 
     {% if ingredient.id is not None %}
         <form action="{% url 'aromableapp:ingredient' ingredient.id %}" method="post">
@@ -9,22 +14,24 @@
         <form action="{% url 'aromableapp:ingredients' %}" method="post">
     {% endif %}
         {% csrf_token %}
+    <form>
+        <div class="form-group">
         <fieldset>
             <label for="name">Name: </label>
-            <input id="name" type="text" name="name" value="{{ ingredient.name }}">
+            <input class="form-control" id="name" type="text" name="name" value="{{ ingredient.name }}">
         </fieldset>
         <fieldset>
             <label for="notes">Notes:</label>
-            <input id="notes" type="text" name="notes" value="{{ ingredient.notes }}">
+            <input class="form-control" id="notes" type="text" name="notes" value="{{ ingredient.notes }}">
         </fieldset>
 
         {% if ingredient.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">
             <input type="submit" value="Update" />
         {% else %}
-            <input type="submit" value="Create" />
+            <input type="submit" value="Save" class="ingredientoil" />
         {% endif %}
-
+</div>
     </form>
 
 {% endblock %}
