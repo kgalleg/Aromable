@@ -6,7 +6,12 @@
     <meta charset="utf-8">
     <title>Aromable nav bar list.py</title>
 
-    <style>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- <style>
         .navList {
             list-style-type: none;
             display: flex;
@@ -16,9 +21,9 @@
          .navList__route {
                 margin: 0 0.5em;
          }
-    </style>
+    </style> -->
 
-    <!-- <link rel="stylesheet" href="{% static 'styles/base.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
 
     {% block css %}
     {% endblock %}
@@ -28,13 +33,13 @@
 
     <nav id="site-nav">
         <ol class="navList">
-            <li class="navList__route"><a href="{% url 'aromableapp:home' %}">Home</a></li>
-            <li class="navList__route"><a href="{% url 'aromableapp:ingredients' %}">Oils</a></li>
-            <li class="navList__route"><a href="{% url 'aromableapp:recipes' %}">Recipes</a></li>
-            <li class="navList__route"><a href="{% url 'aromableapp:categories' %}">Categories</a></li>
-            <li class="navList__route"><a href="{% url 'aromableapp:favorites' %}">Favorites</a></li>
-            <li class="navList__route"><a href="{% url 'aromableapp:logout' %}">Logout</a></li>
-            <li class="navList__route"><a href="{% url 'aromableapp:register' %}">Register</a></li>
+            <li class="navList__route"><a class="links" href="{% url 'aromableapp:home' %}">Home</a></li>
+            <li class="navList__route"><a class="links" href="{% url 'aromableapp:ingredients' %}">Oils</a></li>
+            <li class="navList__route"><a class="links" href="{% url 'aromableapp:recipes' %}">Recipes</a></li>
+            <li class="navList__route"><a class="links" href="{% url 'aromableapp:categories' %}">Categories</a></li>
+            <li class="navList__route"><a class="links" href="{% url 'aromableapp:favorites' %}">Favorites</a></li>
+            <li class="navList__route"><a class="links" href="{% url 'aromableapp:logout' %}">Logout</a></li>
+            <li class="navList__route"><a class="links" href="{% url 'aromableapp:register' %}">Register</a></li>
         </ol>
     </nav>
 
