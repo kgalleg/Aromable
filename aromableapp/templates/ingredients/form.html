@@ -2,11 +2,17 @@
 {% load staticfiles %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'styles/ingredient.css' %}"  />
+    <link rel="stylesheet" href="{% static 'styles/ingredientform.css' %}"  />
 {% endblock %}
 
 {% block content %}
-    <h1 class="enteroil">Enter Your Oil</h1>
+
+{% load static %}
+<img src="{% static 'images/AddOil.png' %}" style="width:auto;height:150px;margin-bottom:30px;display:block;
+margin-left: auto;
+margin-right: auto;"  >
+
+    <!-- <h1 class="enteroil">Enter Your Oil</h1> -->
 
     {% if ingredient.id is not None %}
         <form action="{% url 'aromableapp:ingredient' ingredient.id %}" method="post">
@@ -14,24 +20,30 @@
         <form action="{% url 'aromableapp:ingredients' %}" method="post">
     {% endif %}
         {% csrf_token %}
-    <form>
-        <div class="form-group">
+
+
+
+        <div class="form-group insideformdiv">
         <fieldset>
-            <label for="name">Name: </label>
-            <input class="form-control" id="name" type="text" name="name" value="{{ ingredient.name }}">
+
+            <label for="name"> </label>
+            <input class="form-control" id="name" type="text" name="name" placeholder="Oil Name" value="{{ ingredient.name }}">
         </fieldset>
         <fieldset>
-            <label for="notes">Notes:</label>
-            <input class="form-control" id="notes" type="text" name="notes" value="{{ ingredient.notes }}">
+            <label for="notes"> </label>
+            <input class="form-control" id="notes" type="text" name="notes" placeholder="Oil Notes" value="{{ ingredient.notes }}">
         </fieldset>
 
+
+<div class="buttonoil2">
         {% if ingredient.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
+            <input type="submit" value="Update" class="ingredientoil buttonoil"/>
         {% else %}
-            <input type="submit" value="Save" class="ingredientoil" />
+            <input type="submit" value="Save" class="ingredientoil buttonoil" />
         {% endif %}
+    </div>
 </div>
-    </form>
+
 
 {% endblock %}

@@ -1,22 +1,40 @@
-{% extends 'shared/base.html' %} {% block content %}
-<h1>Recipe Form</h1>
+{% extends 'shared/base.html' %}
+
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/recipeform.css' %}"  />
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<img src="{% static 'images/addrecipe.png' %}" style="width:auto;height:150px;margin-bottom:30px;display:block;
+margin-left: auto;
+margin-right: auto;"  >
+
+
+<!-- <h1>Recipe Form</h1> -->
 
 {% if recipe.id is not None %}
 <form action="{% url 'aromableapp:recipe' recipe.id %}" method="post">
   {% else %}
   <form action="{% url 'aromableapp:recipes' %}" method="post">
     {% endif %} {% csrf_token %}
+
+
+    <div class="form-group insideformdiv">
     <fieldset>
-      <label for="name">Name: </label>
-      <input id="name" type="text" name="name" value="{{ recipe.name }}" />
+      <label for="name"> </label>
+      <input class="form-control" id="name" type="text" name="name" placeholder="Name of Recipe" value="{{ recipe.name }}" />
     </fieldset>
     <fieldset>
-      <label for="notes">Notes:</label>
-      <input id="notes" type="text" name="notes" value="{{ recipe.notes }}" />
+      <label for="notes"></label>
+      <input class="form-control" id="notes" type="text" name="notes" placeholder="Recipe Notes" value="{{ recipe.notes }}" />
     </fieldset>
     <fieldset>
-      <label for="category">Category: </label>
-      <select id="category" type="text" name="category">
+      <label for="exampleSelect1 category">Category </label>
+      <select class="form-control recipedropdown" id="exampleSelect1 category" type="text" name="category">
         {% for category in all_categories%}
         <option value="{{ category.id }}"> {{ category.name }}</option>
         {% endfor %}
@@ -24,7 +42,7 @@
     </fieldset>
 
     <fieldset>
-      <label for="ingredient">Oils: </label>
+      <label class="oilscheckboxlabel" for="ingredient">Oils: </label>
 
       {% for ingredient in all_ingredients%}
       <input
@@ -37,13 +55,16 @@
       {% endfor %}
     </fieldset>
 
+    <div class="buttonoil2">
     {% if recipe.id is not None %}
     <input type="hidden" name="actual_method" value="PUT" />
-    <input type="submit" value="Update" />
+    <input type="submit" value="Update" class="ingredientoil" />
     {% else %}
-    <input type="submit" value="Create" />
+    <input type="submit" value="Add Recipe" class="ingredientoil" />
     {% endif %}
   </form>
 
   {% endblock %}
+</div>
+</div>
 </form>

@@ -1,7 +1,19 @@
 {% extends 'shared/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/categoryform.css' %}"  />
+{% endblock %}
 
 {% block content %}
-    <h1>Enter a category</h1>
+
+{% load static %}
+<img src="{% static 'images/addcategories.png' %}" style="width:auto;height:150px;margin-bottom:30px;display:block;
+margin-left: auto;
+margin-right: auto;"  >
+
+
+    <!-- <h1>Enter a category</h1> -->
 
     {% if category.id is not None %}
         <form action="{% url 'aromableapp:category' category.id %}" method="post">
@@ -9,22 +21,24 @@
         <form action="{% url 'aromableapp:categories' %}" method="post">
     {% endif %}
         {% csrf_token %}
+
+        <div class="form-group insideformdiv">
         <fieldset>
-            <label for="name">Name: </label>
-            <input id="name" type="text" name="name" value="{{ category.name }}">
+            <label for="name"> </label>
+            <input class ="form-control" id="name" type="text" name="name" placeholder="Enter Name of Category" value="{{ category.name }}">
         </fieldset>
         <!-- <fieldset>
             <label for="notes">Notes:</label>
             <input id="notes" type="text" name="notes" value="{{ category.notes }}">
         </fieldset> -->
-
+        <div class="buttonoil2">
         {% if category.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
+            <input class="ingredientoil buttonoil"  type="submit" value="Update" />
         {% else %}
-            <input type="submit" value="Create" />
+            <input class="ingredientoil buttonoil"  type="submit" value="Save" />
         {% endif %}
-
+</div>
     </form>
 
 {% endblock %}
