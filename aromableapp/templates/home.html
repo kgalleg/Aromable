@@ -18,9 +18,11 @@ margin-right: auto;"  >
 
 <div class="homebuttons">
 
-<a class="btn btn-secondary home" href="{% url 'aromableapp:recipe_form' %}">Add Recipe</a><br>
-<a class="btn btn-secondary home" href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a><br>
-<a class="btn btn-secondary home" href="{% url 'aromableapp:ingredients' %}">View Oil Inventory</a><br>
+<a class="btn btn-secondary home" href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a>
+<a class="btn btn-secondary home" href="{% url 'aromableapp:category_form' %}">Add Category</a>
+<a class="btn btn-secondary home" href="{% url 'aromableapp:recipe_form' %}">Add Recipe</a>
+
+<a class="btn btn-secondary home" href="{% url 'aromableapp:ingredients' %}">View Oil Inventory</a>
 <a class="btn btn-secondary home" href="{% url 'aromableapp:recipes' %}">View Recipes</a>
 
 {% endblock content %}
