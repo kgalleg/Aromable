@@ -1,24 +1,33 @@
 {% extends 'shared/base.html' %}
 
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/categorylist.css' %}"  />
+{% endblock %}
+
 {% block content %}
 
 {% load static %}
 <img src="{% static 'images/categorylist.png' %}"
 style="width:auto;
 height:100px;
-margin-bottom:30px;
+margin-bottom:15px;
 margin-left: auto;
 margin-right: auto;"  >
 
 <br>
     <!-- <h1>Categories</h1> -->
-
-    <a href="{% url 'aromableapp:category_form' %}">Add Category</a>
+    <div class="addcategory">
+    <a class="addcategorytext" href="{% url 'aromableapp:category_form' %}">Add Category</a>
+</div>
 
     <ol>
     {% for category in all_categories %}
         <li>
-            <a href="{% url 'aromableapp:category' category.id %}">
+            <a class="categoryname">
+            <!-- <a class="categoryname" href="{% url 'aromableapp:category' category.id %}"> -->
+
                 {{ category.name }}
             </a>
             <!-- ({{ category.notes }}) -->
@@ -31,12 +40,12 @@ margin-right: auto;"  >
                     <form action="{% url 'aromableapp:category' category.id %}" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="actual_method" value="DELETE">
-                        <button>Delete</button>
+                        <button class="btn btn-secondary category">Delete</button>
                     </form>
 
                     <form action="{% url 'aromableapp:category_edit_form' category.id %}" method="GET">
                         {% csrf_token %}
-                        <button>Edit</button>
+                        <button class="btn btn-secondary category" >Edit</button>
                     </form>
                 </section>
         </li>

@@ -1,5 +1,13 @@
 {% extends 'shared/base.html' %}
 
+
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/favoritelist.css' %}"  />
+{% endblock %}
+
+
 {% block content %}
 
 {% load static %}
@@ -16,7 +24,7 @@ margin-right: auto;"  >
     <ul>
     {% for favorite in all_favorites %}
 
-      <a href="{% url 'aromableapp:recipe' favorite.recipe_id %}">{{favorite.recipe.name }}</a> <br>
+      <a class="favoritelist" href="{% url 'aromableapp:recipe' favorite.recipe_id %}">{{favorite.recipe.name }}</a> <br>
 
     {% endfor %}
     </ul>

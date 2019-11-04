@@ -20,7 +20,8 @@ margin-right: auto;"  >
 <form action="{% url 'aromableapp:recipe' recipe.id %}" method="post">
   {% else %}
   <form action="{% url 'aromableapp:recipes' %}" method="post">
-    {% endif %} {% csrf_token %}
+    {% endif %}
+    {% csrf_token %}
 
 
     <div class="form-group insideformdiv">

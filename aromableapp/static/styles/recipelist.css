@@ -1,0 +1,33 @@
+.addrecipe{
+    color: #F1F7EE;
+    background: #e07a5f;
+    border-radius: 10px;
+    font-size: 25px;
+    /* margin: 20px; */
+    padding: 10px 100px;
+    margin-left: 45px;
+
+}
+
+.addrecipediv {
+    padding-bottom: 20px ;
+    padding-top: 1px;
+}
+
+.recipename {
+    color: #222222;
+}
+
+.catnotes {
+    color: #89B6A5;
+}
+
+ol {
+    padding-top: 50px;
+}
+
+li {
+    height: 80px;
+}
+
+
