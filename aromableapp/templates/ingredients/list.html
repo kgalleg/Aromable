@@ -1,9 +1,22 @@
 {% extends 'shared/base.html' %}
 
-{% block content %}
-    <h1>Oils Inventory
-    </h1>
+{% load staticfiles %}
 
+
+
+
+
+{% block content %}
+
+{% load static %}
+<img src="{% static 'images/oillist.png' %}"
+style="width:auto;
+height:92px;
+margin-bottom:30px;
+margin-left: auto;
+margin-right: auto;"  >
+
+<br>
     <a href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a>
 
     <ol>
@@ -21,13 +34,13 @@
             <section id="ingredient-actions" style="display:flex;">
                     <form action="{% url 'aromableapp:ingredient' ingredient.id %}" method="POST">
                         {% csrf_token %}
-                        <input type="hidden" name="actual_method" value="DELETE">
-                        <button>Delete</button>
+                        <input class="oil" type="hidden" name="actual_method" value="DELETE">
+                        <button class="btn btn-secondary" >Delete</button>
                     </form>
 
                     <form action="{% url 'aromableapp:ingredient_edit_form' ingredient.id %}" method="GET">
                         {% csrf_token %}
-                        <button>Edit</button>
+                        <button id="oil" class="btn btn-secondary oil" >Edit</button>
                     </form>
                 </section>
         </li>

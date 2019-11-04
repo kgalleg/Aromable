@@ -2,14 +2,16 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Favorites??</title>
-  </head>
-  <body>
-    <h1>Favorites</h1>
+{% load static %}
+<img src="{% static 'images/favorites.png' %}"
+style="width:auto;
+height:90px;
+margin-bottom:30px;
+margin-left: auto;
+margin-right: auto;"  >
+<br>
+
+    <!-- <h1>Favorites</h1> -->
 
     <ul>
     {% for favorite in all_favorites %}
