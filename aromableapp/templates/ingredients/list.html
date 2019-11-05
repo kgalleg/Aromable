@@ -2,8 +2,9 @@
 
 {% load staticfiles %}
 
-
-
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/ingredientlist.css' %}"  />
+{% endblock %}
 
 
 {% block content %}
@@ -17,30 +18,34 @@ margin-left: auto;
 margin-right: auto;"  >
 
 <br>
-    <a href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a>
+<div class="addoil">
+    <a class="addoiltext" href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a>
+    </div>
 
     <ol>
     {% for ingredient in all_ingredients %}
         <li>
-            <a href="{% url 'aromableapp:ingredient' ingredient.id %}">
+            <!-- <a class="oilname" href="{% url 'aromableapp:ingredient' ingredient.id %}"> -->
+            <a class="oilname" >
+
                 {{ ingredient.name }}
             </a>
             <!-- ({{ ingredient.notes }}) -->
             <ul>
 
-                <li>{{ ingredient.notes }}</li>
+                <li class="oilnotes">{{ ingredient.notes }}</li>
 
             </ul>
             <section id="ingredient-actions" style="display:flex;">
                     <form action="{% url 'aromableapp:ingredient' ingredient.id %}" method="POST">
                         {% csrf_token %}
-                        <input class="oil" type="hidden" name="actual_method" value="DELETE">
-                        <button class="btn btn-secondary" >Delete</button>
+                        <input  type="hidden" name="actual_method" value="DELETE">
+                        <button class="btn btn-secondary oil" >Delete</button>
                     </form>
 
                     <form action="{% url 'aromableapp:ingredient_edit_form' ingredient.id %}" method="GET">
                         {% csrf_token %}
-                        <button id="oil" class="btn btn-secondary oil" >Edit</button>
+                        <button  class="btn btn-secondary oil" >Edit</button>
                     </form>
                 </section>
         </li>

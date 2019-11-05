@@ -1,0 +1,52 @@
+.category {
+    margin: 3px;
+
+
+vertical-align: middle;
+background-color:#1F5673;
+
+  color:#F1F7EE;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 8px;
+  width: 75px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  margin-bottom: 25px;
+  margin-top: 2px;
+}
+
+.addcategory {
+    padding-bottom: 20px ;
+    padding-top: 20px;
+}
+
+.addcategorytext{
+    color: #F1F7EE;
+    background: #e07a5f;
+    border-radius: 10px;
+    font-size: 25px;
+    /* margin: 20px; */
+    padding: 10px 100px;
+    margin-left: 45px;
+
+}
+
+ol {
+    padding-top: 30px;
+}
+
+
+.oilnotes {
+    color: #89B6A5;
+}
+
+.categoryname {
+    color: #222222;
+}

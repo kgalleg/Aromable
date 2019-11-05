@@ -1,5 +1,6 @@
 import sqlite3
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from aromableapp.models import Recipe, Category, Ingredient
 from aromableapp.models import model_factory
@@ -24,21 +25,28 @@ def get_recipe(recipe_id):
 
     return db_cursor.fetchone()
 
-def get_categories():
+@login_required
+def get_categories(request):
     with sqlite3.connect(Connection.db_path) as conn:
+
         conn.row_factory = model_factory(Category)
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
         select
             c.id,
-            c.name
+            c.name,
+            c.user_id
+
         from aromableapp_category c
-        """)
+        where c.user_id = ?
+        """, (request.user.id,))
+
 
         return db_cursor.fetchall()
 
-def get_ingredients():
+@login_required
+def get_ingredients(request):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Ingredient)
         db_cursor = conn.cursor()
@@ -47,9 +55,12 @@ def get_ingredients():
         select
             i.id,
             i.name,
-            i.notes
+            i.notes,
+            i.user_id
+
         from aromableapp_ingredient i
-        """)
+        where i.user_id = ?
+        """, (request.user.id,))
 
         return db_cursor.fetchall()
 
@@ -59,8 +70,8 @@ def get_ingredients():
 def recipe_form(request):
     if request.method == 'GET':
 
-        categories = get_categories()
-        ingredients = get_ingredients()
+        categories = get_categories(request)
+        ingredients = get_ingredients(request)
 
         template = 'recipes/form.html'
         context = {
@@ -75,8 +86,8 @@ def recipe_form(request):
 def recipe_edit_form(request, recipe_id):
     if request.method == 'GET':
         recipe = get_recipe(recipe_id)
-        categories = get_categories()
-        ingredients = get_ingredients()
+        categories = get_categories(request)
+        ingredients = get_ingredients(request)
 
         template = 'recipes/form.html'
         context = {

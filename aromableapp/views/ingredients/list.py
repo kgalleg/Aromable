@@ -6,7 +6,7 @@ from aromableapp.models import Ingredient
 from aromableapp.models import model_factory
 from ..connection import Connection
 
-
+@login_required
 def create_ingredient(cursor, row):
     _row = sqlite3.Row(cursor, row)
 
@@ -24,7 +24,7 @@ def ingredient_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
 
-            user = request.user
+
 
             conn.row_factory = model_factory(Ingredient)
             db_cursor = conn.cursor()
@@ -33,10 +33,11 @@ def ingredient_list(request):
                 SELECT
                     i.id,
                     i.name,
-                    i.notes
+                    i.notes,
+                    i.user_id
                 FROM aromableapp_ingredient i
-                where user_id = ?
-            """, (user.id,))
+                where i.user_id = ?
+            """, (request.user.id,))
 
             all_ingredients = db_cursor.fetchall()
 

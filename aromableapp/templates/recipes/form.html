@@ -14,13 +14,14 @@ margin-left: auto;
 margin-right: auto;"  >
 
 
-<!-- <h1>Recipe Form</h1> -->
+
 
 {% if recipe.id is not None %}
 <form action="{% url 'aromableapp:recipe' recipe.id %}" method="post">
   {% else %}
   <form action="{% url 'aromableapp:recipes' %}" method="post">
-    {% endif %} {% csrf_token %}
+    {% endif %}
+    {% csrf_token %}
 
 
     <div class="form-group insideformdiv">
@@ -35,6 +36,7 @@ margin-right: auto;"  >
     <fieldset>
       <label for="exampleSelect1 category">Category </label>
       <select class="form-control recipedropdown" id="exampleSelect1 category" type="text" name="category">
+
         {% for category in all_categories%}
         <option value="{{ category.id }}"> {{ category.name }}</option>
         {% endfor %}
@@ -55,7 +57,9 @@ margin-right: auto;"  >
       {% endfor %}
     </fieldset>
 
+
     <div class="buttonoil2">
+
     {% if recipe.id is not None %}
     <input type="hidden" name="actual_method" value="PUT" />
     <input type="submit" value="Update" class="ingredientoil" />

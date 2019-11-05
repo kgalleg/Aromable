@@ -24,6 +24,7 @@ def get_category(category_id):
 
         return db_cursor.fetchone()
 
+@login_required
 def get_categories():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Category)

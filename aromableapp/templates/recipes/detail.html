@@ -1,37 +1,61 @@
-{% extends 'shared/base.html' %} {% block content %}
+{% extends 'shared/base.html' %} {% load staticfiles %} {% block css %}
+<link rel="stylesheet" href="{% static 'styles/recipedetail.css' %}" />
+{% endblock %} {% block content %} {% load static %}
+<img
+  src="{% static 'images/recipedetails.png' %}"
+  style="width:auto;
+height:150px;
+margin-bottom:30px;
+margin-left: auto;
+margin-right: auto;"
+/>
+<h1>{{favorited}}</h1>
 <section id="recipe-details">
-  <h1>Recipe Name: {{ recipe.name }}</h1>
-  <h5>Recipe Notes: {{ recipe.notes }}</h5>
-  <h5>Category: {{ recipe.category.name }}</h5>
+  <p>Name: {{ recipe.name }}</p>
+  <p>Notes: {{ recipe.notes }}</p>
+  <p>Category: {{ recipe.category.name }}</p>
   <!-- <h5>Oil(s): {{ recipe.ingredient_list.all}}</h5> -->
 
-  <p>Oil(s):</p>
-  {% for relationship in recipe.ingredient_list.all %}
-  <p>{{ relationship.ingredient.name }}</p>
+  <p>
+    Oil(s): {% for relationship in recipe.ingredient_list.all %}
+    {{ relationship.ingredient.name }}
+  </p>
   {% endfor %}
 </section>
 
 <section id="recipe-actions" style="display:flex;">
-  <form action="{% url 'aromableapp:favorites' %}" method="POST">
+  <form action="{% url 'aromableapp:favorite' recipe.id  %}" method="POST">
     {% csrf_token %}
+
+    {% if favorited is False%}
+    <input type="hidden" name="actual_method" value="DELETE" />
+    <button class="btn btn-secondary redetail">Remove from Favorites</button>
+  </form>
+
+  {% else %}
+  <form action="{% url 'aromableapp:favorites' %}" method="DELETE">
+    {% csrf_token %}
+
     <input
       type="hidden"
       name="recipe_id"
       id="recipe_id"
       value="{{ recipe.id }}"
     />
-    <button value="{{ recipe.id }}" type="submit">Add To Favorites</button>
-  </form>
-  <form action="{% url 'aromableapp:favorite' recipe.id  %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="actual_method" value="DELETE" />
-    <button>Remove from Favorites</button>
+    <button
+      class="btn btn-secondary redetail"
+      value="{{ recipe.id }}"
+      type="submit"
+    >
+      Add To Favorites
+    </button>
+    {% endif %}
   </form>
 
   <form action="{% url 'aromableapp:recipe' recipe.id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="actual_method" value="DELETE" />
-    <button>Delete Recipe</button>
+    <button class="btn btn-secondary redetail">Delete Recipe</button>
   </form>
 
   <form
@@ -39,7 +63,7 @@
     method="GET"
   >
     {% csrf_token %}
-    <button>Edit Recipe</button>
+    <button class="btn btn-secondary redetail">Edit Recipe</button>
   </form>
 </section>
 {% endblock %}
