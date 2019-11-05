@@ -40,8 +40,6 @@ def favorite_list(request):
 
         with sqlite3.connect(Connection.db_path) as conn:
 
-
-
             db_cursor = conn.cursor()
 
     # ??? are placeholders to validate parameters

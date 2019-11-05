@@ -9,7 +9,7 @@ margin-bottom:30px;
 margin-left: auto;
 margin-right: auto;"
 />
-
+<h1>{{favorited}}</h1>
 <section id="recipe-details">
   <p>Name: {{ recipe.name }}</p>
   <p>Notes: {{ recipe.notes }}</p>
@@ -23,41 +23,34 @@ margin-right: auto;"
   {% endfor %}
 </section>
 
-
-
 <section id="recipe-actions" style="display:flex;">
-
-
-  
-  {% if recipe.id in aromableapp_favorite %}
   <form action="{% url 'aromableapp:favorite' recipe.id  %}" method="POST">
-      {% csrf_token %}
+    {% csrf_token %}
 
-      <input type="hidden" name="actual_method" value="DELETE" />
-      <button class="btn btn-secondary redetail">Remove from Favorites</button>
-    </form>
-
+    {% if favorited is False%}
+    <input type="hidden" name="actual_method" value="DELETE" />
+    <button class="btn btn-secondary redetail">Remove from Favorites</button>
+  </form>
 
   {% else %}
-  <form action="{% url 'aromableapp:favorites' %}" method="POST">
-      {% csrf_token %}
-      <input
-        type="hidden"
-        name="recipe_id"
-        id="recipe_id"
-        value="{{ recipe.id }}"
-      />
-      <button
-        class="btn btn-secondary redetail"
-        value="{{ recipe.id }}"
-        type="submit">
-        Add To Favorites
-      </button>
-    </form>
+  <form action="{% url 'aromableapp:favorites' %}" method="DELETE">
+    {% csrf_token %}
 
-{% endif %}
-
-
+    <input
+      type="hidden"
+      name="recipe_id"
+      id="recipe_id"
+      value="{{ recipe.id }}"
+    />
+    <button
+      class="btn btn-secondary redetail"
+      value="{{ recipe.id }}"
+      type="submit"
+    >
+      Add To Favorites
+    </button>
+    {% endif %}
+  </form>
 
   <form action="{% url 'aromableapp:recipe' recipe.id %}" method="POST">
     {% csrf_token %}

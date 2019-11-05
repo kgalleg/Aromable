@@ -7,6 +7,7 @@ class Favorite(models.Model):
 
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    
 
     class Meta:
             verbose_name = ("favorite")

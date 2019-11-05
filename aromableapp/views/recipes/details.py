@@ -2,7 +2,7 @@ import sqlite3
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from aromableapp.models import Recipe, Category, RecipeIngredient, Ingredient
+from aromableapp.models import Recipe, Category, RecipeIngredient, Ingredient, Favorite
 from aromableapp.models import model_factory
 from ..connection import Connection
 
@@ -112,9 +112,18 @@ def recipe_details(request, recipe_id):
     if request.method == 'GET':
         # recipe = get_recipe(recipe_id)
         recipe = Recipe.objects.get(pk=recipe_id)
+
+        try:
+            is_favorited = Favorite.objects.get(recipe_id=recipe_id, user_id=request.user.id)
+        except Favorite.DoesNotExist:
+            is_favorited = None
+
         template = 'recipes/detail.html'
 
-        context = {'recipe': recipe}
+        context = {
+            'recipe': recipe,
+            'favorited': is_favorited is None
+            }
 
         return render(request, template, context)
 
