@@ -1,7 +1,17 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Categories</h1>
+
+{% load static %}
+<img src="{% static 'images/categorylist.png' %}"
+style="width:auto;
+height:100px;
+margin-bottom:30px;
+margin-left: auto;
+margin-right: auto;"  >
+
+<br>
+    <!-- <h1>Categories</h1> -->
 
     <a href="{% url 'aromableapp:category_form' %}">Add Category</a>
 

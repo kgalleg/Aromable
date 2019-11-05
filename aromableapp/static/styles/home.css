@@ -1,0 +1,35 @@
+.home {
+    margin: 5px;
+
+
+vertical-align: middle;
+background-color:#1F5673;
+
+  color:#F1F7EE;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 400px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+}
+
+
+.home:hover {
+    color: #F1F7EE;
+}
+
+.homebuttons {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+

@@ -1,10 +1,24 @@
 {% extends 'shared/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/recipeform.css' %}"  />
+{% endblock %}
 
 {% block content %}
-    <h1>Recipes
 
-    </h1>
+{% load static %}
+<img src="{% static 'images/recipelist.png' %}"
+style="width:auto;
+height:100px;
+margin-bottom:30px;
+margin-left: auto;
+margin-right: auto;"  >
 
+
+
+    <!-- <h1>Recipes</h1> -->
+<br>
     <a href="{% url 'aromableapp:recipe_form' %}">Add Recipe</a>
 
     <ol>

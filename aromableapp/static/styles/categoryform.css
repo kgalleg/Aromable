@@ -1,0 +1,61 @@
+input[type="text"] {
+    width: 40%;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    display: inline-block;
+    position:relative;
+  }
+
+  fieldset {
+      text-align: center;
+  }
+
+  .ingredientoil {
+    margin-top: 20px;
+    vertical-align: left;
+    background-color: #1f5673;
+    color: #f1f7ee;
+    text-align: right;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+  }
+
+  form {
+      margin-left: 25%;
+      margin-right:25%;
+      width: 50%;
+
+  }
+
+
+
+  .formwrapper {
+         text-align:center;
+
+  }
+
+    .buttonoil2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+   }
+
+
+
+
+
+
+
+
+
+

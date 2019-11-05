@@ -1,13 +1,29 @@
 {% extends 'shared/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}" class="homeimage" />
+{% endblock %}
 
 {% block content %}
-<h1>Aromable</h1>
 
-<h4>Hi {{ user.first_name }}!</h4> <br>
+{% load static %}
+<img src="{% static 'images/aromablelogo.png' %}" style="width:auto;height:300px;margin-bottom:30px;display:block;
+margin-left: auto;
+margin-right: auto;"  >
 
-<a href="{% url 'aromableapp:recipe_form' %}">Add Recipe</a><br>
-<a href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a><br>
-<a href="{% url 'aromableapp:ingredients' %}">View oil inventory</a><br>
-<a href="{% url 'aromableapp:recipes' %}">View Recipes</a>
+
+<h3 style="text-align:center;padding:20px;">Hi {{ user.first_name }}!</h3> <br>
+
+<div class="homebuttons">
+
+<a class="btn btn-secondary home" href="{% url 'aromableapp:ingredient_form' %}">Add Oil</a>
+<a class="btn btn-secondary home" href="{% url 'aromableapp:category_form' %}">Add Category</a>
+<a class="btn btn-secondary home" href="{% url 'aromableapp:recipe_form' %}">Add Recipe</a>
+
+<a class="btn btn-secondary home" href="{% url 'aromableapp:ingredients' %}">View Oil Inventory</a>
+<a class="btn btn-secondary home" href="{% url 'aromableapp:recipes' %}">View Recipes</a>
 
 {% endblock content %}
+</div>
+
