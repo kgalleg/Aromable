@@ -48,13 +48,25 @@ margin-right: auto;"  >
 
       {% for ingredient in all_ingredients%}
       <input
+
+      {% if ingredient.id in recipeingredients %}
+        type="checkbox" checked
+        id="ingredient{{ ingredient.id }}"
+        name="ingredient[]"
+        value="{{ ingredient.id }}"
+      />
+      {% else %}
+      <input
         type="checkbox"
         id="ingredient{{ ingredient.id }}"
         name="ingredient[]"
         value="{{ ingredient.id }}"
       />
+
+      {% endif %}
       {{ ingredient.name }}
       {% endfor %}
+
     </fieldset>
 
 
