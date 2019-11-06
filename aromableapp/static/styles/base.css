@@ -24,7 +24,7 @@ body {
 
 }
 .navList__route {
-    margin: 0 0.5em;
+    margin: .6em 0.5em;
 }
 
 .links {
@@ -35,3 +35,7 @@ body {
 .links:hover {
     color: #F1F7EE;
 }
+
+/* .navbarspace {
+    padding-bottom: 0px !important;
+} */
