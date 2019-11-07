@@ -11,23 +11,27 @@
 {% block content %}
 
 {% load static %}
-<img src="{% static 'images/favorites.png' %}"
+<img class="favorites" src="{% static 'images/favorites.png' %}"
 style="width:auto;
-height:90px;
+height:180px;
 margin-bottom:30px;
 margin-left: auto;
-margin-right: auto;"  >
+margin-right: auto;
+margin-top: 20px;
+padding: 20px;
+display: block;"  >
 <br>
 
     <!-- <h1>Favorites</h1> -->
-
-    <ul>
+<div class="favoritediv" >
+    <ul >
     {% for favorite in all_favorites %}
 
       <a class="favoritelist" href="{% url 'aromableapp:recipe' favorite.recipe_id %}">{{favorite.recipe.name }}</a> <br>
 
     {% endfor %}
     </ul>
+  </div>
 
   </body>
 </html>

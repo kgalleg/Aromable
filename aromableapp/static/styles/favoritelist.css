@@ -1,3 +1,23 @@
 .favoritelist {
-    color: #222222;
+    color: #F1F7EE;
+    background-color:#E07A5F;
+
+   
+    height: 80px;
+
+    border-radius: 8px;
+    font-size: 20px;
+    display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+
+
+
+.favoritediv {
+    width: 400px; /* Or whatever */
+    height: auto; /* Or whatever */
+    margin: auto; /* Magic! */
 }
