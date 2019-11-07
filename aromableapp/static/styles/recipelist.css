@@ -3,8 +3,8 @@
     background: #e07a5f;
     border-radius: 10px;
     font-size: 25px;
-    /* margin: 20px; */
-    padding: 10px 100px;
+    margin: 20px;
+    padding: 10px 68px;
     margin-left: 45px;
 
 }
@@ -26,8 +26,8 @@ ol {
     padding-top: 50px;
 }
 
-li {
+/* li {
     height: 80px;
-}
+} */
 
 
