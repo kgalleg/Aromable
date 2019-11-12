@@ -14,13 +14,13 @@ margin-right: auto;"
   <p>Name: {{ recipe.name }}</p>
   <p>Notes: {{ recipe.notes }}</p>
   <p>Category: {{ recipe.category.name }}</p>
-  <!-- <h5>Oil(s): {{ recipe.ingredient_list.all}}</h5> -->
 
-  <p>
+
+  <div class="oilnamesdiv">
     Oil(s): {% for relationship in recipe.ingredient_list.all %}
-    {{ relationship.ingredient.name }}
-  </p>
-  {% endfor %}
+    {{ relationship.ingredient.name }} |
+    {% endfor %}
+  </div>
 </section>
 
 <section id="recipe-actions" style="display:flex;">
