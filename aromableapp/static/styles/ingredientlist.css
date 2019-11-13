@@ -9,19 +9,14 @@ margin-bottom: 8px;
 margin-top: 5px;
 width: 75px;
 height: 35px;
-
 justify-content: center;
 position: relative;
-margin-bottom: 8px;
-
-
 }
 
 .addoil {
     padding-bottom: 50px ;
     /* padding-top: 20px; */
     text-align: center;
-
 }
 
 .addoiltext{
@@ -32,9 +27,11 @@ margin-bottom: 8px;
     /* margin: 20px; */
     padding: 10px 100px;
     /* margin-left: 45px; */
-
 }
 
+ol {
+    padding-top: 30px;
+}
 
 
 

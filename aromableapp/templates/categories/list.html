@@ -11,20 +11,23 @@
 {% load static %}
 <img src="{% static 'images/categorylist.png' %}"
 style="width:auto;
-height:100px;
-margin-bottom:15px;
+height:150px;
 margin-left: auto;
-margin-right: auto;"  >
+margin-right: auto;
+margin-top: 20px;
+display: block;"  >
 
 <br>
-    <!-- <h1>Categories</h1> -->
-    <div class="addcategory">
+<div class = "addoildiv main-content">
+<div class="addcategory">
     <a class="addcategorytext" href="{% url 'aromableapp:category_form' %}">Add Category</a>
 </div>
 
+
+
     <ol>
     {% for category in all_categories %}
-        <li>
+        <li class="oillistdesign">
             <a class="categoryname">
             <!-- <a class="categoryname" href="{% url 'aromableapp:category' category.id %}"> -->
 
@@ -34,9 +37,11 @@ margin-right: auto;"  >
             <ul>
 
 
-
             </ul>
-            <section id="category-actions" style="display:flex;">
+
+
+            <section id="category-actions" >
+
                     <form action="{% url 'aromableapp:category' category.id %}" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="actual_method" value="DELETE">
@@ -48,7 +53,11 @@ margin-right: auto;"  >
                         <button class="btn btn-secondary category" >Edit</button>
                     </form>
                 </section>
-        </li>
+
+
+                </li>
+
     {% endfor %}
-    </ol>
+</ol>
+</div>
 {% endblock %}
